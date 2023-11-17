@@ -1,0 +1,55 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/main_nav.ejs %>
+
+<!-- Main content container -->
+<main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10">
+            <title><%= title %></title>
+   
+   <!-- Button for adding certifications -->
+            <a href="/certifications-list/add" class="btn btn-primary" 
+            role="button"><i class="fas fa-plus-circle"></i> Add Certifications</a>     
+        <br>
+          <!-- Table for displaying certifications -->
+        <table class="table table-bordered table-striped table-hover">
+            <tr class="d-flex">
+                <th class="text-center col-2">name</th>
+                <th class="text-center col-2">company</th>
+                <th class="text-center col-2">date_of_issue</th>
+                <th class="text-center col-4">description</th>
+                <th class="text-center col-4"></th>
+                <th class="text-center col-4"></th>
+                
+            </tr>
+                      <!-- Loop for displaying certification data in table rows -->
+            <% for(let count=0;count<CertificationList.length;count++) { %>    
+            <tr class="d-flex">
+                <td class="text-center col-2"><%= CertificationList[count].name %></td>
+                <td class="text-center col-2"><%= CertificationList[count].company %></td>
+                <td class="text-center col-2"><%= CertificationList[count].date_of_issue %></td>
+                <td class="text-center col-4"><%= CertificationList[count].description %></td>
+                <!-- Edit button for each certification -->
+                <td class="text-center col-1">
+                    <a href="/certifications-list/edit/<%= CertificationList[count]._id %>" 
+                        class="btn btn-primary btn-sm">
+                        <i class="fas fa-pencil-alt"></i> Edit
+                    </a>
+
+                </td>
+                <!-- Delete button for each certification -->
+                <td class="text-center col-1">
+                    <a href="/certifications-list/delete/<%= CertificationList[count]._id %>" 
+                        class="btn btn-danger btn-sm">
+                        <i class="fas trash-alt"></i> Delete
+                    </a>
+                 </td>
+            </tr>            
+            <% } %>
+        </table>
+    </div>
+    </div>
+</main>
+<% include ../partials/bottom_nav.ejs %>
+<% include ../partials/footer.ejs %>
+
