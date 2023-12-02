@@ -9,7 +9,9 @@ module.exports.DislayCertificationlist = async (req,res,next)=>{ //< Mark functi
        const CertificationList = await Certifications.find(); //< Use of await keyword
        res.render('certifications/list', {
           title: 'Certifications', 
+          displayName: req.user ? req.user.displayName:'',
           CertificationList: CertificationList
+
        });
     }catch(err){
        console.error(err);
@@ -24,7 +26,8 @@ module.exports.DislayCertificationlist = async (req,res,next)=>{ //< Mark functi
     try{
         res.render('certifications/add',
         {
-            title:'Add Certifications'
+            title:'Add Certifications',
+            displayName: req.user ? req.user.displayName:''
         })
     }
     catch(err)
@@ -66,6 +69,7 @@ module.exports.EditCertifications = async (req,res,next)=>{
     res.render('certifications/edit',
     {
         title:'Edit Certifications',
+        displayName: req.user ? req.user.displayName:'',
         Certifications:certificationsToEdit
     })
 }

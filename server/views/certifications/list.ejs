@@ -6,27 +6,38 @@
     <div class="row">
         <div class="offset-md-1 col-md-10">
         <div><h1>Certificates<h1></div>
+        <% if(typeof displayName=='string' && displayName) { %>
             
    
    <!-- Button for adding certifications -->
             <a href="/certifications-list/add" class="btn btn-primary" 
             role="button"><i class="fas fa-plus-circle"></i> Add Certifications</a>     
         <br>
+        <% } %>
         <br>
           <!-- Table for displaying certifications -->
         <table class="table table-bordered table-striped table-hover">
             <tr class="d-flex">
+            <% if(typeof displayName=='string' && displayName) { %>
                 <th class="text-center col-2">name</th>
                 <th class="text-center col-2">company</th>
                 <th class="text-center col-2">date_of_issue</th>
                 <th class="text-center col-4">description</th>
                 <th class="text-center col-1"></th>
                 <th class="text-center col-1"></th>
+            <% } else { %>
+        <th class="text-center col-2">name</th>
+        <th class="text-center col-2">company</th>
+        <th class="text-center col-3">date_of_issue</th>
+        <th class="text-center col-5">description</th>
+        
+    <% } %>
                 
             </tr>
                       <!-- Loop for displaying certification data in table rows -->
             <% for(let count=0;count<CertificationList.length;count++) { %>    
             <tr class="d-flex">
+            <% if(typeof displayName=='string' && displayName) { %>
                 <td class="text-center col-2"><%= CertificationList[count].name %></td>
                 <td class="text-center col-2"><%= CertificationList[count].company %></td>
                 <td class="text-center col-2"><%= CertificationList[count].date_of_issue %></td>
@@ -46,6 +57,13 @@
                         <i class="fas trash-alt"></i> Delete
                     </a>
                  </td>
+                 <% } else { %>
+            <td class="text-center col-2"><%= CertificationList[count].name %></td>
+            <td class="text-center col-2"><%= CertificationList[count].company %></td>
+            <td class="text-center col-3"><%= CertificationList[count].date_of_issue%></td>
+            <td class="text-center col-5"><%= CertificationList[count].description %></td>
+            
+        <% } %>       
             </tr>            
             <% } %>
         </table>
